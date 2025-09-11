@@ -3,7 +3,7 @@ import Router       "mo:liminal/Router";
 import RouteContext "mo:liminal/RouteContext";
 import Liminal      "mo:liminal";
 import Rave1 "rave_1";
-// import Evoli "evoli";
+import Evoli "evoli";
 
 
 module Routes {
@@ -52,12 +52,12 @@ module Routes {
                         ctx.buildResponse(#ok, #html(raveHtml))
                     }
                 ),
-        //  Router.getQuery("/evoli",
-        //             func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
-        //                 let evoliHtml = Evoli.html();
-        //                 ctx.buildResponse(#ok, #html(evoliHtml))
-        //             }
-        //         ),
+         Router.getQuery("/evoli",
+                    func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
+                        let evoliHtml = Evoli.html();
+                        ctx.buildResponse(#ok, #html(evoliHtml))
+                    }
+                ),
         Router.getQuery("/{path}",
           func(ctx) : Liminal.HttpResponse {
             ctx.buildResponse(#notFound, #error(#message("Not found")))

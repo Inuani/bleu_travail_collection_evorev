@@ -14,7 +14,7 @@ module {
       --color2: rgb(16, 56, 217);
       --charizard1: rgb(255, 213, 170);
       --charizard2: #d2ddaa;
-      --charizardfront: url(unnamed.webp);
+      --charizardfront: url(evoli.webp);
     }
 
     body, html {
@@ -284,11 +284,6 @@ module {
       text-decoration: underline;
     }
 
-.metadata-container {
-  color: #e2e8f0;
-  font-family: 'Courier New', monospace;
-  padding: 1rem;
-}
 
 .title {
   font-size: 1.5rem;
@@ -297,34 +292,7 @@ module {
   text-shadow: 0 0 10px rgba(37, 149, 198, 0.5); /* Darker text shadow */
 }
 
-.metadata-item {
-  margin: 0.75rem 0;
-  padding: 0.5rem;
-  border-left: 3px solid #2595c6; /* Darker border color */
-  background: rgba(10, 135, 190, 0.1); /* Darker background color */
-}
 
-.label {
-  color: #748191; /* Darker shade of #94a3b8 */
-  font-size: 0.875rem;
-  margin-bottom: 0.25rem;
-}
-
-.value {
-  color: #2595c6; /* Darker shade of #38bdf8 */
-  font-size: 1rem;
-}
-
-.blockchain-badge {
-  display: inline-block;
-  background: rgba(10, 135, 190, 0.2); /* Darker background */
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  border: 1px solid #2595c6; /* Darker border */
-  color: #2595c6; /* Darker text color */
-  font-size: 0.875rem;
-  animation: pulse 2s infinite;
-}
 
 .timestamp {
   margin-top: 1.5rem;
@@ -345,54 +313,6 @@ module {
   }
 }
 
-.history-section {
-  color: #e2e8f0;
-  font-family: 'Courier New', monospace;
-  padding: 1rem;
-  margin-top: 2rem;
-  border-top: 1px solid #2595c6;
-}
-
-.history-title {
-  font-size: 1.5rem;
-  color: #2595c6;
-  margin-bottom: 1.5rem;
-  text-shadow: 0 0 10px rgba(37, 149, 198, 0.5);
-}
-
-.history-item {
-  margin: 1rem 0;
-  padding: 1rem;
-  border-left: 3px solid #2595c6;
-  background: rgba(10, 135, 190, 0.1);
-}
-
-.history-date {
-  color: var(--color1);
-  font-size: 0.875rem;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-.history-description {
-  color: #748191;
-  font-size: 0.875rem;
-  margin-bottom: 1rem;
-}
-
-.history-image {
-  max-width: 200px;
-  height: auto;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid #2595c6;
-}
-
-.history-image:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(37, 149, 198, 0.6);
-}
 
   </style>
 </head>
@@ -401,39 +321,14 @@ module {
     <div class=\"card charizard animated\">
     </div>
    
-      <div class=\"metadata-container\">
-        <h1 class=\"title\">Satoshi's Cyber Boots</h1>
 
-        <div class=\"metadata-item\">
-          <div class=\"label\">BLOCKCHAIN</div>
-          <div class=\"blockchain-badge\">ICP</div>
-        </div>
-        
-        <div class=\"metadata-item\">
-          <div class=\"label\">DESCRIPTION</div>
-          <div class=\"value\">Delivering On Grand Experiments (D.O.G.E.)</div>
-        </div>
-        
-        <div class=\"metadata-item\">
-          <div class=\"label\">OWNER</div>
-          <div class=\"value\">Just a regular cyber mother fucker brining money back to people.</div>
-        </div>
         
         <div class=\"timestamp\">
           Timestamp: November 15th, 2024 23:37:06
         </div>
-      </div>
 
-      <div class=\"history-section\">
-  <h2 class=\"history-title\">History</h2>
-  <div class=\"history-item\">
-    <div class=\"history-date\">May 17th, 2025 - Crap Sogn Gion, GALAAXY, 7032 Laax</div>
-    <div class=\"history-description\">Vitalik captured with Satoshi's Cyber Boots</div>
-    <a href=\"https://satj4-jqaaa-aaaak-qtqlq-cai.raw.icp0.io/vitalik.webp\" target=\"_blank\">
-      <img src=\"vitalik.webp\" alt=\"Vitalik with Satoshi's Cyber Boots\" class=\"history-image\">
-    </a>
-  </div>
-</div>
+     
+
     <footer>
       <p>A <a href=\"https://elie.diy\" target=\"_blank\">elie.diy</a> project</p>
     </footer>
@@ -442,22 +337,22 @@ module {
   <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js\"></script>
   <script>
     var x;
-    var \$cards = \$(\".card\");
-    var \$style = \$(\".hover\");
+    var \\$cards = \\$(\".card\");
+    var \\$style = \\$(\".hover\");
 
-    \$cards.on(\"mousemove touchmove\", function(e) {
+    \\$cards.on(\"mousemove touchmove\", function(e) {
       // normalise touch/mouse
       var pos = [e.offsetX, e.offsetY];
       e.preventDefault();
       if (e.type === \"touchmove\") {
         pos = [e.touches[0].clientX, e.touches[0].clientY];
       }
-      var \$card = \$(this);
+      var \\$card = \\$(this);
       // math for mouse position
       var l = pos[0];
       var t = pos[1];
-      var h = \$card.height();
-      var w = \$card.width();
+      var h = \\$card.height();
+      var w = \\$card.width();
       var px = Math.abs(Math.floor(100 / w * l) - 100);
       var py = Math.abs(Math.floor(100 / h * t) - 100);
       var pa = (50 - px) + (50 - py);
@@ -470,28 +365,28 @@ module {
       var ty = ((tp - 50) / 2) * -1;
       var tx = ((lp - 50) / 1.5) * .5;
       // css to apply for active card
-      var grad_pos = `background-position: \${lp}% \${tp}%;`;
-      var sprk_pos = `background-position: \${px_spark}% \${py_spark}%;`;
-      var opc = `opacity: \${p_opc / 100};`;
-      var tf = `transform: rotateX(\${ty}deg) rotateY(\${tx}deg);`;
+      var grad_pos = \\`background-position: \\${lp}% \\${tp}%;\\`;
+      var sprk_pos = \\`background-position: \\${px_spark}% \\${py_spark}%;\\`;
+      var opc = \\`opacity: \\${p_opc / 100};\\`;
+      var tf = \\`transform: rotateX(\\${ty}deg) rotateY(\\${tx}deg);\\`;
       // need to use a <style> tag for psuedo elements
-      var style = `.card:hover:before { \${grad_pos} }  /* gradient */ .card:hover:after { \${sprk_pos} \${opc} }   /* sparkles */`;
+      var style = \\`.card:hover:before { \\${grad_pos} }  /* gradient */ .card:hover:after { \\${sprk_pos} \\${opc} }   /* sparkles */\\`;
       // set / apply css class and style
-      \$cards.removeClass(\"active\");
-      \$card.removeClass(\"animated\");
-      \$card.attr(\"style\", tf);
-      \$style.html(style);
+      \\$cards.removeClass(\"active\");
+      \\$card.removeClass(\"animated\");
+      \\$card.attr(\"style\", tf);
+      \\$style.html(style);
       if (e.type === \"touchmove\") {
         return false;
       }
       clearTimeout(x);
     }).on(\"mouseout touchend touchcancel\", function() {
       // remove css, apply custom animation on end
-      var \$card = \$(this);
-      \$style.html(\"\");
-      \$card.removeAttr(\"style\");
+      var \\$card = \\$(this);
+      \\$style.html(\"\");
+      \\$card.removeAttr(\"style\");
       x = setTimeout(function() {
-        \$card.addClass(\"animated\");
+        \\$card.addClass(\"animated\");
       }, 2500);
     });
   </script>
@@ -501,3 +396,5 @@ module {
         htmlTemplate
     }
 };
+
+

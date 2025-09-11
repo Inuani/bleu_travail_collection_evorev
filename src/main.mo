@@ -16,25 +16,25 @@ import RouterMiddleware "mo:liminal/Middleware/Router";
 import App "mo:liminal/App";
 import HttpContext "mo:liminal/HttpContext";
 
-shared ({ caller = initializer }) actor class Actor() = self {
+shared ({ caller = initializer }) persistent actor class Actor() = self {
 
-  let canisterId = Principal.fromActor(self);
+  transient let canisterId = Principal.fromActor(self);
 
     stable var assetStableData = HttpAssets.init_stable_store(canisterId, initializer);
     assetStableData := HttpAssets.upgrade_stable_store(assetStableData);
 
     stable let protectedRoutesState = ProtectedRoutes.init();
-    let protected_routes_storage = ProtectedRoutes.RoutesStorage(protectedRoutesState);
+    transient let protected_routes_storage = ProtectedRoutes.RoutesStorage(protectedRoutesState);
 
-    let setPermissions : HttpAssets.SetPermissions = {
+    transient let setPermissions : HttpAssets.SetPermissions = {
         commit = [initializer];
         manage_permissions = [initializer];
         prepare = [initializer];
     };
-    var assetStore = HttpAssets.Assets(assetStableData, ?setPermissions);
-    var assetCanister = AssetCanister.AssetCanister(assetStore);
+    transient var assetStore = HttpAssets.Assets(assetStableData, ?setPermissions);
+    transient var assetCanister = AssetCanister.AssetCanister(assetStore);
 
-    let assetMiddlewareConfig : AssetsMiddleware.Config = {
+    transient let assetMiddlewareConfig : AssetsMiddleware.Config = {
         store = assetStore;
     };
 
@@ -75,7 +75,7 @@ shared ({ caller = initializer }) actor class Actor() = self {
     };
 
 
-    let app = Liminal.App({
+    transient let app = Liminal.App({
         middleware = [
             NFCProtectionMiddleware(),
             AssetsMiddleware.new(assetMiddlewareConfig),
