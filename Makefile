@@ -24,7 +24,7 @@ ic:
 	dfx deploy $(CANISTER_NAME) --ic
 
 url:
-	$(OPEN_CMD) http://$(CANISTER_ID).raw.localhost:4943/test
+	$(OPEN_CMD) http://$(CANISTER_ID).raw.localhost:4943/engagement
 
 sync:
 	icx-asset --replica http://127.0.0.1:4943 --pem ~/.config/dfx/identity/raygen/identity.pem sync $(CANISTER_ID) ./public

@@ -16,7 +16,36 @@ import RouterMiddleware "mo:liminal/Middleware/Router";
 import App "mo:liminal/App";
 import HttpContext "mo:liminal/HttpContext";
 
+
+import Engagement "engagement";
+
 shared ({ caller = initializer }) persistent actor class Actor() = self {
+
+
+    let engagementState = Engagement.init();
+transient let engagementContract = Engagement.EngagementContract(engagementState);
+
+public func setEngagementProject(name: Text, description: Text) : async () {
+    engagementContract.setProjectInfo(name, description)
+};
+
+public func engage(name: Text) : async Bool {
+    engagementContract.engage(name)
+};
+
+public query func getEngagementInfo() : async {name: ?Text; description: ?Text} {
+    engagementContract.getProjectInfo()
+};
+
+public query func getEngagedNames() : async [Text] {
+    engagementContract.getParticipants()
+};
+
+public query func getEngagementCount() : async Nat {
+    engagementContract.getCount()
+};
+
+
 
   transient let canisterId = Principal.fromActor(self);
 
@@ -79,7 +108,7 @@ shared ({ caller = initializer }) persistent actor class Actor() = self {
         middleware = [
             NFCProtectionMiddleware(),
             AssetsMiddleware.new(assetMiddlewareConfig),
-            RouterMiddleware.new(Routes.routerConfig()),
+            RouterMiddleware.new(Routes.routerConfig(engagementContract)),
         ];
         errorSerializer = Liminal.defaultJsonErrorSerializer;
         candidRepresentationNegotiator = Liminal.defaultCandidRepresentationNegotiator;

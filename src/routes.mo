@@ -4,10 +4,16 @@ import RouteContext "mo:liminal/RouteContext";
 import Liminal      "mo:liminal";
 import Rave1 "rave_1";
 import Evoli "evoli";
+import Text "mo:new-base/Text";
+import Route "mo:liminal/Route";
+
+
+import Engagement "engagement";
+
 
 
 module Routes {
-  public func routerConfig() : Router.Config {
+  public func routerConfig(engagementContract: Engagement.EngagementContract) : Router.Config {
     {
       prefix              = null;
       identityRequirement = null;
@@ -58,6 +64,37 @@ module Routes {
                         ctx.buildResponse(#ok, #html(evoliHtml))
                     }
                 ),
+                Router.getQuery("/engagement",
+    func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
+        let html = Engagement.html(engagementContract);
+        ctx.buildResponse(#ok, #html(html))
+    }
+),
+Router.post("/engagement/engage", #syncUpdate(
+  func<system>(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
+    // Extract name from query parameters
+    switch (Engagement.extractName(ctx.httpContext.request.url)) {
+      case null {
+        ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Name parameter is required\"}"))
+      };
+      case (?name) {
+        if (Text.size(name) == 0) {
+          ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Name cannot be empty\"}"))
+        } else if (Text.size(name) < 2) {
+          ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Name must be at least 2 characters long\"}"))
+        } else {
+          let success = engagementContract.engage(name);
+          
+          if (success) {
+            ctx.buildResponse(#ok, #text("{\"success\": true, \"message\": \"Welcome to the movement, " # name # "!\"}"))
+          } else {
+            ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Name already exists. Please choose a different name.\"}"))
+          }
+        }
+      };
+    }
+  }
+)),
         Router.getQuery("/{path}",
           func(ctx) : Liminal.HttpResponse {
             ctx.buildResponse(#notFound, #error(#message("Not found")))
