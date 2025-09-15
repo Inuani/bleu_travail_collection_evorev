@@ -2,7 +2,6 @@
 import Router       "mo:liminal/Router";
 import RouteContext "mo:liminal/RouteContext";
 import Liminal      "mo:liminal";
-import Rave1 "rave_1";
 import Evoli "evoli";
 import Text "mo:new-base/Text";
 import Route "mo:liminal/Route";
@@ -40,30 +39,23 @@ module Routes {
                   # "        <img src='/logo.webp' alt='logo asso petit prince' style='width: 150px; height: auto; margin-right: 15px;'/>"
                   # "        <h1 style='color: #5a368e; margin: 0;'>Journal été 2025 des étoiles d'Alleret</h1>"
                   # "    </div>"
-                  # "    <div class='jscf' data-cf-display-id='3q8MenX'></div>"
-                  # "    <script>"
-                  # "        window.cfAsyncInit = function() { "
-                  # "            cfLoader.init(document.getElementsByClassName('jscf')); "
-                  # "        };"
-                  # "    </script>"
-                  # "    <script async src='https://platform.contentfry.com/sdk/embed.js'></script>"
                   # "</body>"
                   # "</html>";
             ctx.buildResponse(#ok, #html(testHtml))
           }
         ),
-        Router.getQuery("/rave_1",
-                    func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
-                        let raveHtml = Rave1.html();
-                        ctx.buildResponse(#ok, #html(raveHtml))
-                    }
-                ),
-         Router.getQuery("/evoli",
-                    func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
-                        let evoliHtml = Evoli.html();
-                        ctx.buildResponse(#ok, #html(evoliHtml))
-                    }
-                ),
+        // Router.getQuery("/rave_1",
+        //             func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
+        //                 let raveHtml = Rave1.html();
+        //                 ctx.buildResponse(#ok, #html(raveHtml))
+        //             }
+        //         ),
+        //  Router.getQuery("/evoli",
+        //             func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
+        //                 let evoliHtml = Evoli.html();
+        //                 ctx.buildResponse(#ok, #html(evoliHtml))
+        //             }
+        //         ),
                 Router.getQuery("/engagement",
     func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
         let html = Engagement.html(engagementContract);
@@ -75,20 +67,20 @@ Router.post("/engagement/engage", #syncUpdate(
     // Extract name from query parameters
     switch (Engagement.extractName(ctx.httpContext.request.url)) {
       case null {
-        ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Name parameter is required\"}"))
+        ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Il te faut un prénom\"}"))
       };
       case (?name) {
         if (Text.size(name) == 0) {
-          ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Name cannot be empty\"}"))
+          ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Prénom ne peut pas être vide\"}"))
         } else if (Text.size(name) < 2) {
-          ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Name must be at least 2 characters long\"}"))
+          ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Prénom doit être au moins 2 caractères\"}"))
         } else {
           let success = engagementContract.engage(name);
           
           if (success) {
-            ctx.buildResponse(#ok, #text("{\"success\": true, \"message\": \"Welcome to the movement, " # name # "!\"}"))
+            ctx.buildResponse(#ok, #text("{\"success\": true, \"message\": \"Bienvenue sur le projet, " # name # "!\"}"))
           } else {
-            ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Name already exists. Please choose a different name.\"}"))
+            ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Prénom existe déjà. Utilise en un autre.\"}"))
           }
         }
       };
