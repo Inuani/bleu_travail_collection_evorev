@@ -7,12 +7,10 @@ import Text "mo:new-base/Text";
 import Route "mo:liminal/Route";
 
 
-import Engagement "engagement";
-
 
 
 module Routes {
-  public func routerConfig(engagementContract: Engagement.EngagementContract) : Router.Config {
+  public func routerConfig(engagementContract: Evoli.EngagementContract) : Router.Config {
     {
       prefix              = null;
       identityRequirement = null;
@@ -28,16 +26,13 @@ module Routes {
                   # "</head>"
                   # "<body style='font-family: Arial; text-align: center; padding: 50px;'>"
                   # "    <div style='margin-bottom: 20px;'>"
-                                # "        <a href='/collection' style='text-decoration: none;'>"
-                                # "            <button style='background-color: #5a368e; color: white; padding: 12px 24px; margin: 0 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;'>Voir collection été 2025</button>"
-                                # "        </a>"
-                                # "        <a href='https://6xj5i-zaaaa-aaaas-aabiq-cai.raw.icp0.io/' style='text-decoration: none;'>"
-                                # "            <button style='background-color: #7d5ba6; color: white; padding: 12px 24px; margin: 0 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;'>Voir collection été 2024</button>"
+                                # "        <a href='https://discord.gg/tmGKpqGCwX' style='text-decoration: none;'>"
+                                # "            <button style='background-color: #0040a7; color: white; padding: 12px 24px; margin: 0 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;'>Rejoins les communautés des collections d'Évorev</button>"
                                 # "        </a>"
                                 # "    </div>"
                   # "    <div style='display: flex; align-items: center; justify-content: center; margin-bottom: 20px;'>"
-                  # "        <img src='/logo.webp' alt='logo asso petit prince' style='width: 150px; height: auto; margin-right: 15px;'/>"
-                  # "        <h1 style='color: #5a368e; margin: 0;'>Journal été 2025 des étoiles d'Alleret</h1>"
+                  # "        <img src='/logo.webp' alt='logo ordre d'Evorev style='width: 100px; height: auto; margin-right: 15px;'/>"
+                  # "        <h1 style='color: #0040a7; margin: 0;'>Collection Ordre d'Évorev</h1>"
                   # "    </div>"
                   # "</body>"
                   # "</html>";
@@ -56,16 +51,16 @@ module Routes {
         //                 ctx.buildResponse(#ok, #html(evoliHtml))
         //             }
         //         ),
-                Router.getQuery("/engagement",
+                Router.getQuery("/evoli",
     func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
-        let html = Engagement.html(engagementContract);
+        let html = Evoli.html(engagementContract);
         ctx.buildResponse(#ok, #html(html))
     }
 ),
 Router.post("/engagement/engage", #syncUpdate(
   func<system>(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
     // Extract name from query parameters
-    switch (Engagement.extractName(ctx.httpContext.request.url)) {
+    switch (Evoli.extractName(ctx.httpContext.request.url)) {
       case null {
         ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Il te faut un prénom\"}"))
       };

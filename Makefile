@@ -24,7 +24,7 @@ ic:
 	dfx deploy $(CANISTER_NAME) --ic
 
 url:
-	$(OPEN_CMD) http://$(CANISTER_ID).raw.localhost:4943/engagement
+	$(OPEN_CMD) http://$(CANISTER_ID).raw.localhost:4943/evoli
 
 sync:
 	icx-asset --replica http://127.0.0.1:4943 --pem ~/.config/dfx/identity/raygen/identity.pem sync $(CANISTER_ID) ./public
@@ -36,7 +36,7 @@ protect:
 	python3 scripts/setup_route.py $(CANISTER_ID) test
 
 protect_ic:
-	python3 scripts/setup_route.py $(CANISTER_ID) rave_4 --random-key --ic
+	python3 scripts/setup_route.py $(CANISTER_ID) evoli --ic
 
 reinstall:
 	dfx deploy --ic $(CANISTER_NAME) --mode reinstall

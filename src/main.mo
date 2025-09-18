@@ -17,7 +17,7 @@ import App "mo:liminal/App";
 import HttpContext "mo:liminal/HttpContext";
 
 
-import Engagement "engagement";
+import Engagement "evoli";
 
 shared ({ caller = initializer }) persistent actor class Actor() = self {
 
