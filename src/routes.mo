@@ -11,7 +11,7 @@ import Debug "mo:base/Debug";
 
 
 module Routes {
-  public func routerConfig(engagementContract: Evoli.EngagementContract) : Router.Config {
+  public func routerConfig(engagementContract: Evoli.EngagementContract, canisterId: Text) : Router.Config {
     {
       prefix              = null;
       identityRequirement = null;
@@ -29,6 +29,9 @@ module Routes {
                   # "    <div style='margin-bottom: 20px;'>"
                                 # "        <a href='https://discord.gg/tmGKpqGCwX' style='text-decoration: none;'>"
                                 # "            <button style='background-color: #0040a7; color: white; padding: 12px 24px; margin: 0 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;'>Rejoins la communauté les collections d'Évorev</button>"
+                                # "        </a>"
+                                # "        <a href='http://" # canisterId # ".raw.icp0.io/collection' style='text-decoration: none;'>"
+                                # "            <button style='background-color: #0040a7; color: white; padding: 12px 24px; margin: 0 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;'>Voir la collection</button>"
                                 # "        </a>"
                                 # "    </div>"
                   # "    <div style='display: flex; align-items: center; justify-content: center; margin-bottom: 20px;'>"

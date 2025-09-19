@@ -108,7 +108,7 @@ public query func getEngagementCount() : async Nat {
         middleware = [
             NFCProtectionMiddleware(),
             AssetsMiddleware.new(assetMiddlewareConfig),
-            RouterMiddleware.new(Routes.routerConfig(engagementContract)),
+            RouterMiddleware.new(Routes.routerConfig(engagementContract, Principal.toText(canisterId))),
         ];
         errorSerializer = Liminal.defaultJsonErrorSerializer;
         candidRepresentationNegotiator = Liminal.defaultCandidRepresentationNegotiator;
