@@ -2,6 +2,8 @@
 
 # icx-asset --replica http://127.0.0.1:4943 --pem ~/.config/dfx/identity/raygen/identity.pem sync $(dfx canister id liminal) ./public
 
+# repomix --ignore ".dfx/,.mops/,public/,reader/,scripts/,ufr-lib/"
+
 include .env
 
 REPLICA_URL := $(if $(filter ic,$(subst ',,$(DFX_NETWORK))),https://ic0.app,http://127.0.0.1:4943)
@@ -26,6 +28,9 @@ ic:
 url:
 	$(OPEN_CMD) http://$(CANISTER_ID).raw.localhost:4943/evoli
 
+irl:
+	$(OPEN_CMD) https://$(CANISTER_ID).raw.icp0.io
+
 sync:
 	icx-asset --replica http://127.0.0.1:4943 --pem ~/.config/dfx/identity/raygen/identity.pem sync $(CANISTER_ID) ./public
 
@@ -45,4 +50,4 @@ ls:
 	icx-asset --replica https://ic0.app --pem ~/.config/dfx/identity/raygen/identity.pem ls $(CANISTER_ID)
 
 delete_asset:
-	dfx canister call --ic $(CANISTER_ID) delete_asset '(record { key = "/Thibault.jpg" })'
+	dfx canister call --ic $(CANISTER_ID) delete_asset '(record { key = "/logo.webp" })'

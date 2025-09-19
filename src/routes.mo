@@ -27,7 +27,7 @@ module Routes {
                   # "<body style='font-family: Arial; text-align: center; padding: 50px;'>"
                   # "    <div style='margin-bottom: 20px;'>"
                                 # "        <a href='https://discord.gg/tmGKpqGCwX' style='text-decoration: none;'>"
-                                # "            <button style='background-color: #0040a7; color: white; padding: 12px 24px; margin: 0 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;'>Rejoins les communautés des collections d'Évorev</button>"
+                                # "            <button style='background-color: #0040a7; color: white; padding: 12px 24px; margin: 0 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;'>Rejoins la communauté les collections d'Évorev</button>"
                                 # "        </a>"
                                 # "    </div>"
                   # "    <div style='display: flex; align-items: center; justify-content: center; margin-bottom: 20px;'>"

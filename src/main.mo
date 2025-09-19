@@ -49,10 +49,10 @@ public query func getEngagementCount() : async Nat {
 
   transient let canisterId = Principal.fromActor(self);
 
-    stable var assetStableData = HttpAssets.init_stable_store(canisterId, initializer);
+    var assetStableData = HttpAssets.init_stable_store(canisterId, initializer);
     assetStableData := HttpAssets.upgrade_stable_store(assetStableData);
 
-    stable let protectedRoutesState = ProtectedRoutes.init();
+    let protectedRoutesState = ProtectedRoutes.init();
     transient let protected_routes_storage = ProtectedRoutes.RoutesStorage(protectedRoutesState);
 
     transient let setPermissions : HttpAssets.SetPermissions = {
