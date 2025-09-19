@@ -4,9 +4,10 @@ import RouteContext "mo:liminal/RouteContext";
 import Liminal      "mo:liminal";
 import Evoli "evoli";
 import Text "mo:new-base/Text";
+import Nat "mo:base/Nat";
 import Route "mo:liminal/Route";
-
-
+import BleuCollection "bleu_collection";
+import Debug "mo:base/Debug";
 
 
 module Routes {
@@ -51,6 +52,24 @@ module Routes {
         //                 ctx.buildResponse(#ok, #html(evoliHtml))
         //             }
         //         ),
+        Router.getQuery("/bleu/{id}", func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
+                   Debug.print("HERE - /bleu/{id} route hit!");
+                   let idText = ctx.getRouteParam("id");
+                   Debug.print("idText from /bleu/{id}: " # idText);
+
+                   let id = switch (Nat.fromText(idText)) {
+                       case (?num) num;
+                       case null {
+                           Debug.print("Invalid ID format: " # idText);
+                           let html = BleuCollection.generateNotFoundPage(0);
+                           return ctx.buildResponse(#notFound, #html(html));
+                       };
+                   };
+
+                   Debug.print("Successfully parsed ID: " # Nat.toText(id));
+                   let html = BleuCollection.generateBleuPage(id);
+                   ctx.buildResponse(#ok, #html(html))
+               }),
                 Router.getQuery("/evoli",
     func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
         let html = Evoli.html(engagementContract);
@@ -71,7 +90,7 @@ Router.post("/engagement/engage", #syncUpdate(
           ctx.buildResponse(#badRequest, #text("{\"success\": false, \"message\": \"Prénom doit être au moins 2 caractères\"}"))
         } else {
           let success = engagementContract.engage(name);
-          
+
           if (success) {
             ctx.buildResponse(#ok, #text("{\"success\": true, \"message\": \"Bienvenue sur le projet, " # name # "!\"}"))
           } else {
