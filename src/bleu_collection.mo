@@ -20,13 +20,21 @@ module {
             name = "evoli";
             imageUrl = "/avoli.webp";
             description = "A serene blue that captures the essence of endless skies";
-            rarity = "Common";
+            rarity = "Rare";
             attributes = [("Type", "Sky"), ("Intensity", "Light"), ("Mood", "Calm")];
         },
         {
             id = 1;
             name = "Ocean Depths";
             imageUrl = "https://via.placeholder.com/400x400/2E5090/FFFFFF?text=Bleu+1";
+            description = "The mysterious deep blue of ocean trenches";
+            rarity = "Rare";
+            attributes = [("Type", "Ocean"), ("Intensity", "Deep"), ("Mood", "Mysterious")];
+        },
+        {
+            id = 2;
+            name = "olalala";
+            imageUrl = "/logo.webp";
             description = "The mysterious deep blue of ocean trenches";
             rarity = "Rare";
             attributes = [("Type", "Ocean"), ("Intensity", "Deep"), ("Mood", "Mysterious")];
@@ -59,7 +67,7 @@ module {
 <head>
     <meta charset=\"UTF-8\">
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-    <title>Bleu Collection</title>
+    <title>Collection de l'Ordre d'Évorev</title>
     <style>
         * {
             margin: 0;
@@ -105,8 +113,9 @@ module {
         }
         .item-image {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
             border-radius: 10px;
             margin-bottom: 1rem;
         }
@@ -140,7 +149,7 @@ module {
 </head>
 <body>
     <div class=\"container\">
-        <h1>Bleu Collection</h1>
+        <h1>Collection de l'Ordre d'Évorev</h1>
         <div class=\"items-grid\">
             " # itemsGrid # "
         </div>
@@ -159,7 +168,7 @@ module {
 <head>
     <meta charset=\"UTF-8\">
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-    <title>" # item.name # " - Bleu Collection</title>
+    <title>" # item.name # " - Collection Ordre d'Évorev</title>
     <style>
         * {
             margin: 0;
@@ -208,8 +217,8 @@ module {
         .item-image {
             width: 100%;
             max-width: 400px;
-            height: 400px;
-            object-fit: cover;
+            height: auto;
+            object-fit: contain;
             border-radius: 15px;
             margin: 0 auto 2rem auto;
             display: block;
@@ -266,7 +275,7 @@ module {
 </head>
 <body>
     <div class=\"container\">
-        <a href=\"/collection\" class=\"back-link\">← Back to Collection</a>
+        <a href=\"/collection\" class=\"back-link\">← Retour à la collection</a>
 
         <div class=\"item-header\">
             <h1 class=\"item-title\">" # item.name # "</h1>
@@ -295,7 +304,7 @@ module {
         var html = "";
         for (item in bleuCollection.vals()) {
             let rarityClass = "rarity-" # Text.toLowercase(item.rarity);
-            html #= "<a href=\"/bleu_" # Nat.toText(item.id) # "\" class=\"item-card\">
+            html #= "<a href=\"/bleu/" # Nat.toText(item.id) # "\" class=\"item-card\">
                 <img src=\"" # item.imageUrl # "\" alt=\"" # item.name # "\" class=\"item-image\">
                 <h3 class=\"item-title\">" # item.name # "</h3>
                 <p class=\"item-id\">Bleu #" # Nat.toText(item.id) # "</p>

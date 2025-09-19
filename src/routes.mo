@@ -40,12 +40,6 @@ module Routes {
             ctx.buildResponse(#ok, #html(testHtml))
           }
         ),
-        // Router.getQuery("/rave_1",
-        //             func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
-        //                 let raveHtml = Rave1.html();
-        //                 ctx.buildResponse(#ok, #html(raveHtml))
-        //             }
-        //         ),
         //  Router.getQuery("/evoli",
         //             func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
         //                 let evoliHtml = Evoli.html();
@@ -70,7 +64,11 @@ module Routes {
                    let html = BleuCollection.generateBleuPage(id);
                    ctx.buildResponse(#ok, #html(html))
                }),
-                Router.getQuery("/evoli",
+               Router.getQuery("/collection", func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
+                   let html = BleuCollection.generateCollectionPage();
+                   ctx.buildResponse(#ok, #html(html))
+               }),
+                       Router.getQuery("/evoli",
     func(ctx: RouteContext.RouteContext) : Liminal.HttpResponse {
         let html = Evoli.html(engagementContract);
         ctx.buildResponse(#ok, #html(html))
