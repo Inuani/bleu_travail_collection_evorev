@@ -7,7 +7,8 @@ module {
     public type BleuItem = {
         id: Nat;
         name: Text;
-        imageUrl: Text;
+        thumbnailUrl: Text; // Image for collection grid
+        imageUrl: Text;     // Full-size image for detail page
         description: Text;
         rarity: Text;
         attributes: [(Text, Text)]; // key-value pairs for additional attributes
@@ -17,27 +18,30 @@ module {
     private let bleuCollection: [BleuItem] = [
         {
             id = 0;
-            name = "evoli";
+            name = "Bleu #0";
+            thumbnailUrl = "/avoli.webp";
             imageUrl = "/avoli.webp";
             description = "A serene blue that captures the essence of endless skies";
             rarity = "Rare";
-            attributes = [("Type", "Sky"), ("Intensity", "Light"), ("Mood", "Calm")];
+            attributes = [("Type", "Sky"), ("Intensity", "Light"), ("", "Calm")];
         },
         {
             id = 1;
-            name = "Ocean Depths";
-            imageUrl = "https://via.placeholder.com/400x400/2E5090/FFFFFF?text=Bleu+1";
+            name = "Bleu #1";
+            thumbnailUrl = "/bleu_1.webp";
+            imageUrl = "/bleu_1_valid.webp";
             description = "The mysterious deep blue of ocean trenches";
             rarity = "Rare";
-            attributes = [("Type", "Ocean"), ("Intensity", "Deep"), ("Mood", "Mysterious")];
+            attributes = [("Type", "Ocean"), ("Aura", "+100"), ("Forme", "Triangle")];
         },
         {
             id = 2;
-            name = "olalala";
+            name = "Bleu #2";
+            thumbnailUrl = "/logo.webp";
             imageUrl = "/logo.webp";
-            description = "The mysterious deep blue of ocean trenches";
-            rarity = "Rare";
-            attributes = [("Type", "Ocean"), ("Intensity", "Deep"), ("Mood", "Mysterious")];
+            description = "The intense blue-black of a stormy midnight sky";
+            rarity = "Legendary";
+            attributes = [("Type", "Storm"), ("Intensity", "Deep"), ("Mood", "Mysterious")];
         }
     ];
 
@@ -271,6 +275,33 @@ module {
             color: #2d3748;
             font-weight: 600;
         }
+        .authentication-status {
+            background: #f0fff4;
+            border: 2px solid #68d391;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .auth-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2f855a;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .auth-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+        .auth-message {
+            color: #276749;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
@@ -279,7 +310,6 @@ module {
 
         <div class=\"item-header\">
             <h1 class=\"item-title\">" # item.name # "</h1>
-            <p class=\"item-id\">Bleu #" # Nat.toText(item.id) # "</p>
         </div>
 
         <img src=\"" # item.imageUrl # "\" alt=\"" # item.name # "\" class=\"item-image\">
@@ -289,6 +319,19 @@ module {
         </div>
 
         <p class=\"item-description\">" # item.description # "</p>
+
+        <div class=\"authentication-status\">
+            <div class=\"auth-title\">
+                <svg class=\"auth-icon\" fill=\"#2f855a\" viewBox=\"0 0 20 20\">
+                    <path d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\"/>
+                </svg>
+                Authentification Vérifiée
+            </div>
+            <p class=\"auth-message\">
+                Cet article est authentique et vérifié.
+                <br>ID de vérification: #" # Nat.toText(item.id) # "-" # item.rarity # "
+            </p>
+        </div>
 
         <div class=\"attributes\">
             <h3 class=\"attributes-title\">Attributes</h3>
@@ -305,9 +348,8 @@ module {
         for (item in bleuCollection.vals()) {
             let rarityClass = "rarity-" # Text.toLowercase(item.rarity);
             html #= "<a href=\"/bleu/" # Nat.toText(item.id) # "\" class=\"item-card\">
-                <img src=\"" # item.imageUrl # "\" alt=\"" # item.name # "\" class=\"item-image\">
+                <img src=\"" # item.thumbnailUrl # "\" alt=\"" # item.name # "\" class=\"item-image\">
                 <h3 class=\"item-title\">" # item.name # "</h3>
-                <p class=\"item-id\">Bleu #" # Nat.toText(item.id) # "</p>
                 <span class=\"item-rarity " # rarityClass # "\">" # item.rarity # "</span>
                 <p class=\"item-description\">" # item.description # "</p>
             </a>";

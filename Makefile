@@ -38,10 +38,10 @@ Isync:
 	icx-asset --replica https://ic0.app --pem ~/.config/dfx/identity/raygen/identity.pem sync $(CANISTER_ID) ./public
 
 protect:
-	python3 scripts/setup_route.py $(CANISTER_ID) test
+	python3 scripts/setup_route.py $(CANISTER_ID) bleu/0
 
 protect_ic:
-	python3 scripts/setup_route.py $(CANISTER_ID) evoli --ic
+	python3 scripts/setup_route.py $(CANISTER_ID) bleu/1 --ic --random-key
 
 reinstall:
 	dfx deploy --ic $(CANISTER_NAME) --mode reinstall

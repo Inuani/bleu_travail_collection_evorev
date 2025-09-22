@@ -9,6 +9,7 @@ import AssetCanister "mo:liminal/AssetCanister";
 import Text "mo:new-base/Text";
 import ProtectedRoutes "nfc_protec_routes";
 import Routes "routes";
+import InvalidScan "invalid_scan";
 
 // import Router "mo:liminal/Router";
 // import RouteContext "mo:liminal/RouteContext";
@@ -91,7 +92,7 @@ public query func getEngagementCount() : async Nat {
                                 {
                                     statusCode = 403;
                                     headers = [("Content-Type", "text/html")];
-                                    body = ?Text.encodeUtf8("Acces resufe - Scan invalide");
+                                    body = ?Text.encodeUtf8(InvalidScan.generateInvalidScanPage());
                                     streamingStrategy = null;
                                 };
                             };
